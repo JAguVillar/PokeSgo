@@ -88,7 +88,8 @@ export default {
         this.loading = false
       }
     },
-    async signout() {
+    async signOut() {
+      console.log('hola')
       try {
         this.loading = true
         const { error } = await supabase.auth.signOut()
@@ -96,6 +97,7 @@ export default {
       } catch (error) {
         alert(error.message)
       } finally {
+        console.log(this.session)
         this.loading = false
       }
     }

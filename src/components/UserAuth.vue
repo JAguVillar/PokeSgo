@@ -8,6 +8,15 @@
       </div>
       <div>
         <input
+          class="inputField"
+          required
+          type="password"
+          placeholder="Your password"
+          v-model="password"
+        />
+      </div>
+      <div>
+        <input
           type="submit"
           class="button block"
           :value="loading ? 'Loading' : 'Send magic link'"
@@ -24,7 +33,8 @@ export default {
   data() {
     return {
       loading: false,
-      email: ''
+      email: '',
+      password: ''
     }
   },
 
@@ -32,8 +42,12 @@ export default {
     async handleLogin() {
       try {
         this.loading = true
-        const { error } = await supabase.auth.signInWithOtp({
-          email: this.email
+        const { error } = await supabase.auth.signUp({
+          email: this.email,
+          password: this.password,
+          options: {
+            emailRedirectTo: 'https://example.com/welcome'
+          }
         })
         if (error) throw error
         alert('Check your email for the login link!')
