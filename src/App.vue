@@ -1,33 +1,22 @@
 <script setup></script>
-
 <template>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <vs-navbar center-collapsed v-model="active" class="nav">
+    <template #left> </template>
+    <vs-navbar-item id="guide"> Guide </vs-navbar-item>
+    <vs-navbar-item id="docs"> Documents </vs-navbar-item>
+    <vs-navbar-item id="components"> Components </vs-navbar-item>
+    <vs-navbar-item id="license"> license </vs-navbar-item>
+    <template #right>
+      <vs-button flat>Login</vs-button>
+      <vs-button>Get Started</vs-button>
+    </template>
+  </vs-navbar>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header> -->
   <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+.nav {
   width: 100%;
   font-size: 12px;
   text-align: center;

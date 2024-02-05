@@ -1,13 +1,13 @@
 <template>
   <!-- Your component template goes here -->
   <div class="container" style="padding: 50px 0 100px 0">
-    {{ session }}
     <Account v-if="session" :session="session" />
     <Auth v-else />
   </div>
 </template>
 
 <script>
+import { useUserStore } from '@/stores/User'
 import Account from '@/components/UserAccount.vue'
 import Auth from '@/components/UserAuth.vue'
 import { supabase } from '../supabase'
@@ -17,7 +17,8 @@ export default {
   data() {
     return {
       countries: [],
-      session: null
+      session: null,
+      store: null
     }
   },
   methods: {
@@ -29,14 +30,20 @@ export default {
   beforeCreate() {},
   created() {},
   beforeMount() {},
-  mounted() {
-    supabase.auth.getSession().then(({ data }) => {
+  async mounted() {
+    const userStore = useUserStore()
+    await supabase.auth.getSession().then(({ data }) => {
       this.session = data.session
+      console.log(this.session)
+      userStore.newUserSession(this.session)
     })
 
     supabase.auth.onAuthStateChange((_, _session) => {
       this.session = _session
+      useUserStore().newUserSession(this.session)
     })
+    this.store = userStore.getUser
+    console.log(userStore.getUser)
   },
   computed: {},
   watch: {}

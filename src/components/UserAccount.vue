@@ -23,6 +23,7 @@
     </div>
 
     <div>
+      <vs-button flat> Active </vs-button>
       <button class="button block" @click="signOut" :disabled="loading">Sign Out</button>
     </div>
   </form>
