@@ -1,6 +1,6 @@
 <template>
   <!-- Your component template goes here -->
-  <div class="mx-auto my-auto" style="padding: 50px 0 100px 0">
+  <div class="mx-auto my-auto" style="padding: 0px">
     <Account v-if="session" :session="session" />
     <Auth v-else />
   </div>
